@@ -11,6 +11,8 @@ from keras.layers import MaxPooling2D
 from keras.layers import Flatten
 from keras.layers import Dense
 from keras.preprocessing.image import ImageDataGenerator
+import matplotlib.pyplot as plt
+
 # Initialising the CNN
 classifier = Sequential()
 
@@ -54,13 +56,38 @@ test_set = test_datagen.flow_from_directory('test_set',
                                             batch_size = 32,
                                             class_mode = 'binary')
 
-classifier.fit_generator(training_set,
+history = classifier.fit_generator(training_set,
                          steps_per_epoch = len(training_set),
-                         epochs = 3,
+                         epochs = 20,
                          validation_data = test_set,
                          validation_steps = len(test_set))
 
 classifier.save("cellClassifier.h5")
+
+print(history.history.keys())
+
+plt.figure(1)
+
+plt.subplot(211)
+plt.plot(history.history['acc'])
+plt.plot(history.history['val_acc'])
+plt.title('model accuracy')
+plt.ylabel('accuracy')
+plt.xlabel('epoch')
+plt.legend(['train', 'test'], loc='upper left')
+
+plt.subplot(212)
+plt.plot(history.history['loss'])
+plt.plot(history.history['val_loss'])
+plt.title('model loss')
+plt.ylabel('loss')
+plt.xlabel('epoch')
+plt.legend(['train', 'test'], loc='upper left')
+
+plt.tight_layout(pad=0.4, w_pad=0.5, h_pad=1.0)
+plt.show()
+
+
 
 
 # test model

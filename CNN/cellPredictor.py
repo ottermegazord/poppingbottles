@@ -2,6 +2,9 @@
 # Importing the Keras libraries and packages
 from keras.models import Sequential
 from keras.models import load_model
+from keras.utils import plot_model
+import pydot
+import graphviz
 
 
 import numpy as np
@@ -9,6 +12,7 @@ from keras.preprocessing import image
 
 classifier = Sequential()
 model = load_model("cellClassifier.h5")
+plot_model(model, to_file='model.png')
 
 test_image = image.load_img('red3.jpg', target_size = (64, 64))
 test_image = image.img_to_array(test_image)
