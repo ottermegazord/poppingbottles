@@ -3,8 +3,8 @@ import numpy as np
 import cv2 as cv
 import cellPredictor
 
-img = cv2.imread('red.jpg', 0)
-img_color = cv2.imread('red.jpg', cv2.IMREAD_COLOR)
+img = cv2.imread('test_input.tif', 0)
+img_color = cv2.imread('test_input.tif', cv2.IMREAD_COLOR)
 mser = cv2.MSER_create()
 vis = img.copy()
 regions, bboxes = mser.detectRegions(img)
@@ -25,7 +25,7 @@ for i, contour in enumerate(hulls):
     cell = cellPredictor.Cell(newBox, "cellClassifier.h5")
     print("Image %i" % i)
     cell.predict()
-    cv2.imwrite('{}.png'.format(i), img_color[y:y+h,x:x+w])
+    #cv2.imwrite('{}.png'.format(i), img_color[y:y+h,x:x+w])
 
 cv2.imshow('img', vis)
 cv2.waitKey(0)
