@@ -21,11 +21,12 @@ for contour in hulls:
 
 for i, contour in enumerate(hulls):
     x,y,w,h = cv2.boundingRect(contour)
+    print(x,y,w,h);
     newBox = cv2.resize(img_color[y:y + h, x:x + w], (64, 64))
     cell = cellPredictor.Cell(newBox, "cellClassifier.h5")
-    print("Image %i" % i)
+    # print("Image %i" % i)
     cell.predict()
-    #cv2.imwrite('{}.png'.format(i), img_color[y:y+h,x:x+w])
+    cv2.imwrite('{}.png'.format(i), img_color[y:y+h,x:x+w])
 
 cv2.imshow('img', vis)
 cv2.waitKey(0)
