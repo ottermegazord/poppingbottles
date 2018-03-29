@@ -1,0 +1,9 @@
+item {
+  id: 1
+  name: 'label_0'
+}
+
+item {
+  id: 2
+  name: 'label_1'
+}
